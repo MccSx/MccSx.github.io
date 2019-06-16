@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-06-14T08:02:35.167Z</updated>
+  <updated>2019-06-15T15:55:48.498Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,46 +17,32 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>first_blog_test</title>
-    <link href="http://yoursite.com/2019/06/14/first-blog-test/"/>
-    <id>http://yoursite.com/2019/06/14/first-blog-test/</id>
+    <title>TypeScript基础</title>
+    <link href="http://yoursite.com/2019/06/14/first-blog/"/>
+    <id>http://yoursite.com/2019/06/14/first-blog/</id>
     <published>2019-06-14T03:04:52.000Z</published>
-    <updated>2019-06-14T08:02:35.167Z</updated>
+    <updated>2019-06-15T15:55:48.498Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ul><li>JS七种数据类型（number、string、undefined、null、object、boolean、symbol）</li><li>any<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n1:<span class="built_in">number</span> = <span class="number">1</span></span><br><span class="line">n1 = <span class="string">'1'</span>  <span class="comment">// error</span></span><br><span class="line"><span class="keyword">let</span> n2:<span class="built_in">any</span> = <span class="number">2</span></span><br><span class="line">n2 = <span class="string">'2'</span>  <span class="comment">// pass</span></span><br></pre></td></tr></table></figure></li></ul><p>如果一个变量在赋值时声明了是<code>number</code>，后面如果把不是<code>number</code>的数据赋值给<code>n1</code>，那就会<strong>报错</strong>；如果一个变量在赋值时声明的时<code>any</code>，后面可以把任何类型的数据赋值给<code>n2</code></p><a id="more"></a><ul><li>枚举(enum)<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Gender &#123; Man, Woman &#125;</span><br><span class="line"><span class="keyword">let</span> jack:Gender = Gender.Man</span><br><span class="line"><span class="built_in">console</span>.log(jack)  <span class="comment">// =&gt; 0</span></span><br><span class="line">jack = Gender.Woman</span><br><span class="line"><span class="built_in">console</span>.log(jack)  <span class="comment">// =&gt; 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> Gender1 = &#123; Man=<span class="string">'man'</span>, Woman=<span class="string">'woman'</span> &#125;</span><br><span class="line"><span class="keyword">let</span> jack:Gender1 = Gender1.Man</span><br><span class="line"><span class="built_in">console</span>.log(jack)  <span class="comment">// =&gt; 'man'</span></span><br><span class="line">jack = Gender1.Woman</span><br><span class="line"><span class="built_in">console</span>.log(jack)  <span class="comment">// =&gt; 'woman'</span></span><br></pre></td></tr></table></figure></li></ul><p>枚举用关键字<code>enum</code>来声明，默认情况下，元素编号从0开始，所以第一种情况的<code>jack</code>值默认是0。也可以手动指定成员的数据，就类似上述第二种情况。如果在给<code>jack</code>赋值时，不小心赋值了类似于<code>Gender.Men</code>，这样就会<strong>报错</strong>；</p><ul><li><p>void<br>代表空类型，一般用在没有返回值的函数声明时，类似于下述情况：</p><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">b: <span class="built_in">any</span></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>never</p></li></ul><p>小tips：默认情况下，<code>null</code>或<code>undefined</code>是所有类型的子类型，就是说可以把<code>null</code>或<code>undefined</code>赋值给<code>number</code>、<code>string</code>等类型的变量。</p><h2 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str1: <span class="built_in">any</span> = <span class="string">'123'</span></span><br><span class="line"><span class="built_in">console</span>.log( (&lt;<span class="built_in">string</span>&gt;str1).split(<span class="string">''</span>) )  <span class="comment">// =&gt; pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str2: <span class="built_in">any</span> = <span class="string">'123'</span></span><br><span class="line"><span class="built_in">console</span>.log( (str2 <span class="keyword">as</span> <span class="built_in">string</span>).split(<span class="string">''</span>) )  <span class="comment">// =&gt; pass</span></span><br></pre></td></tr></table></figure><p>有两种形式：1.<code>&lt;string&gt;str</code>  2.<code>str2 as string</code><br>通过类型断言这种方式可以告诉编译器，“相信我，我知道自己在干什么”。类型断言好比其它语言里的类型转换，但是不进行特殊的数据检查和解构。它没有运行时的影响，只是在编译阶段起作用。TypeScript会假设你，程序员，已经进行了必须的检查。</p>]]></content>
     
     <summary type="html">
     
-    </summary>
-    
-      <category term="前端" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2019/06/14/hello-world/"/>
-    <id>http://yoursite.com/2019/06/14/hello-world/</id>
-    <published>2019-06-14T03:00:54.097Z</published>
-    <updated>2019-06-14T08:41:29.408Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><a id="more"></a><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+      &lt;h1 id=&quot;变量&quot;&gt;&lt;a href=&quot;#变量&quot; class=&quot;headerlink&quot; title=&quot;变量&quot;&gt;&lt;/a&gt;变量&lt;/h1&gt;&lt;h2 id=&quot;数据类型&quot;&gt;&lt;a href=&quot;#数据类型&quot; class=&quot;headerlink&quot; title=&quot;数据类型&quot;&gt;&lt;/a&gt;数据类型&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;JS七种数据类型（number、string、undefined、null、object、boolean、symbol）&lt;/li&gt;
+&lt;li&gt;any&lt;figure class=&quot;highlight ts&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; n1:&lt;span class=&quot;built_in&quot;&gt;number&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;n1 = &lt;span class=&quot;string&quot;&gt;&#39;1&#39;&lt;/span&gt;  &lt;span class=&quot;comment&quot;&gt;// error&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; n2:&lt;span class=&quot;built_in&quot;&gt;any&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;n2 = &lt;span class=&quot;string&quot;&gt;&#39;2&#39;&lt;/span&gt;  &lt;span class=&quot;comment&quot;&gt;// pass&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果一个变量在赋值时声明了是&lt;code&gt;number&lt;/code&gt;，后面如果把不是&lt;code&gt;number&lt;/code&gt;的数据赋值给&lt;code&gt;n1&lt;/code&gt;，那就会&lt;strong&gt;报错&lt;/strong&gt;；如果一个变量在赋值时声明的时&lt;code&gt;any&lt;/code&gt;，后面可以把任何类型的数据赋值给&lt;code&gt;n2&lt;/code&gt;&lt;/p&gt;
     
     </summary>
     
-      <category term="前端" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="TypeScript学习" scheme="http://yoursite.com/categories/TypeScript%E5%AD%A6%E4%B9%A0/"/>
     
     
       <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+    
+      <category term="TypeScript" scheme="http://yoursite.com/tags/TypeScript/"/>
     
   </entry>
   

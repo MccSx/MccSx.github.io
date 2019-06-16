@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[first_blog_test]]></title>
-    <url>%2F2019%2F06%2F14%2Ffirst-blog-test%2F</url>
-    <content type="text"></content>
+    <title><![CDATA[TypeScript基础]]></title>
+    <url>%2F2019%2F06%2F14%2Ffirst-blog%2F</url>
+    <content type="text"><![CDATA[变量数据类型 JS七种数据类型（number、string、undefined、null、object、boolean、symbol） any1234let n1:number = 1n1 = '1' // errorlet n2:any = 2n2 = '2' // pass 如果一个变量在赋值时声明了是number，后面如果把不是number的数据赋值给n1，那就会报错；如果一个变量在赋值时声明的时any，后面可以把任何类型的数据赋值给n2 枚举(enum)1234567891011enum Gender &#123; Man, Woman &#125;let jack:Gender = Gender.Manconsole.log(jack) // =&gt; 0jack = Gender.Womanconsole.log(jack) // =&gt; 1enum Gender1 = &#123; Man='man', Woman='woman' &#125;let jack:Gender1 = Gender1.Manconsole.log(jack) // =&gt; 'man'jack = Gender1.Womanconsole.log(jack) // =&gt; 'woman' 枚举用关键字enum来声明，默认情况下，元素编号从0开始，所以第一种情况的jack值默认是0。也可以手动指定成员的数据，就类似上述第二种情况。如果在给jack赋值时，不小心赋值了类似于Gender.Men，这样就会报错； void代表空类型，一般用在没有返回值的函数声明时，类似于下述情况： 123function a(b: any): void &#123; console.log(a)&#125; never 小tips：默认情况下，null或undefined是所有类型的子类型，就是说可以把null或undefined赋值给number、string等类型的变量。 类型断言12345let str1: any = '123'console.log( (&lt;string&gt;str1).split('') ) // =&gt; passlet str2: any = '123'console.log( (str2 as string).split('') ) // =&gt; pass 有两种形式：1.&lt;string&gt;str 2.str2 as string通过类型断言这种方式可以告诉编译器，“相信我，我知道自己在干什么”。类型断言好比其它语言里的类型转换，但是不进行特殊的数据检查和解构。它没有运行时的影响，只是在编译阶段起作用。TypeScript会假设你，程序员，已经进行了必须的检查。]]></content>
       <categories>
-        <category>前端</category>
+        <category>TypeScript学习</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2019%2F06%2F14%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
+        <tag>TypeScript</tag>
       </tags>
   </entry>
 </search>
