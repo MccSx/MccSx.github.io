@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="JavaScript,TypeScript,">
 
 
 
@@ -81,16 +81,18 @@
 
 
 
-<meta name="description" content="做最好的自己，过想要的生活">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ShiXiang&#39;s Notes">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+<meta name="description" content="变量数据类型 JS七种数据类型（number、string、undefined、null、object、boolean、symbol） any1234let n1:number = 1n1 = &apos;1&apos;  // errorlet n2:any = 2n2 = &apos;2&apos;  // pass    如果一个变量在赋值时声明了是number，后面如果把不是number的数据赋值给n1，那就会报错；如果一个变量">
+<meta name="keywords" content="JavaScript,TypeScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript基础">
+<meta property="og:url" content="http://yoursite.com/2019/06/14/typescript-learning1/index.html">
 <meta property="og:site_name" content="ShiXiang&#39;s Notes">
-<meta property="og:description" content="做最好的自己，过想要的生活">
+<meta property="og:description" content="变量数据类型 JS七种数据类型（number、string、undefined、null、object、boolean、symbol） any1234let n1:number = 1n1 = &apos;1&apos;  // errorlet n2:any = 2n2 = &apos;2&apos;  // pass    如果一个变量在赋值时声明了是number，后面如果把不是number的数据赋值给n1，那就会报错；如果一个变量">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-16T15:41:56.284Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ShiXiang&#39;s Notes">
-<meta name="twitter:description" content="做最好的自己，过想要的生活">
+<meta name="twitter:title" content="TypeScript基础">
+<meta name="twitter:description" content="变量数据类型 JS七种数据类型（number、string、undefined、null、object、boolean、symbol） any1234let n1:number = 1n1 = &apos;1&apos;  // errorlet n2:any = 2n2 = &apos;2&apos;  // pass    如果一个变量在赋值时声明了是number，后面如果把不是number的数据赋值给n1，那就会报错；如果一个变量">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2019/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/14/typescript-learning1/">
 
 
 
 
 
-  <title>归档 | ShiXiang's Notes</title>
+  <title>TypeScript基础 | ShiXiang's Notes</title>
   
 
 
@@ -145,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -271,72 +273,194 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 1 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/14/typescript-learning1/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shi Xiang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ShiXiang's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/06/14/typescript-learning1/" itemprop="url">
-              
-                <span itemprop="name">TypeScript基础</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">TypeScript基础</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-14T11:04:52+08:00" content="2019-06-14">
-          06-14
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-14T11:04:52+08:00">
+                2019-06-14
+              </time>
+            
 
-    </header>
-  </article>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TypeScript学习/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ul>
+<li>JS七种数据类型（number、string、undefined、null、object、boolean、symbol）</li>
+<li>any<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n1:<span class="built_in">number</span> = <span class="number">1</span></span><br><span class="line">n1 = <span class="string">'1'</span>  <span class="comment">// error</span></span><br><span class="line"><span class="keyword">let</span> n2:<span class="built_in">any</span> = <span class="number">2</span></span><br><span class="line">n2 = <span class="string">'2'</span>  <span class="comment">// pass</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>如果一个变量在赋值时声明了是<code>number</code>，后面如果把不是<code>number</code>的数据赋值给<code>n1</code>，那就会<strong>报错</strong>；如果一个变量在赋值时声明的时<code>any</code>，后面可以把任何类型的数据赋值给<code>n2</code></p>
+<a id="more"></a>
+
+<ul>
+<li>枚举(enum)<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Gender &#123; Man, Woman &#125;</span><br><span class="line"><span class="keyword">let</span> jack:Gender = Gender.Man</span><br><span class="line"><span class="built_in">console</span>.log(jack)  <span class="comment">// =&gt; 0</span></span><br><span class="line">jack = Gender.Woman</span><br><span class="line"><span class="built_in">console</span>.log(jack)  <span class="comment">// =&gt; 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> Gender1 = &#123; Man=<span class="string">'man'</span>, Woman=<span class="string">'woman'</span> &#125;</span><br><span class="line"><span class="keyword">let</span> jack:Gender1 = Gender1.Man</span><br><span class="line"><span class="built_in">console</span>.log(jack)  <span class="comment">// =&gt; 'man'</span></span><br><span class="line">jack = Gender1.Woman</span><br><span class="line"><span class="built_in">console</span>.log(jack)  <span class="comment">// =&gt; 'woman'</span></span><br></pre></td></tr></table></figure>
 
 
+</li>
+</ul>
+<p>枚举用关键字<code>enum</code>来声明，默认情况下，元素编号从0开始，所以第一种情况的<code>jack</code>值默认是0。也可以手动指定成员的数据，就类似上述第二种情况。如果在给<code>jack</code>赋值时，不小心赋值了类似于<code>Gender.Men</code>，这样就会<strong>报错</strong>；</p>
+<ul>
+<li><p>void<br>代表空类型，一般用在没有返回值的函数声明时，类似于下述情况：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">b: <span class="built_in">any</span></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>never</p>
+</li>
+</ul>
+<p>小tips：默认情况下，<code>null</code>或<code>undefined</code>是所有类型的子类型，就是说可以把<code>null</code>或<code>undefined</code>赋值给<code>number</code>、<code>string</code>等类型的变量。</p>
+<h2 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str1: <span class="built_in">any</span> = <span class="string">'123'</span></span><br><span class="line"><span class="built_in">console</span>.log( (&lt;<span class="built_in">string</span>&gt;str1).split(<span class="string">''</span>) )  <span class="comment">// =&gt; pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str2: <span class="built_in">any</span> = <span class="string">'123'</span></span><br><span class="line"><span class="built_in">console</span>.log( (str2 <span class="keyword">as</span> <span class="built_in">string</span>).split(<span class="string">''</span>) )  <span class="comment">// =&gt; pass</span></span><br></pre></td></tr></table></figure>
+
+<p>有两种形式：1.<code>&lt;string&gt;str</code>  2.<code>str2 as string</code><br>通过类型断言这种方式可以告诉编译器，“相信我，我知道自己在干什么”。类型断言好比其它语言里的类型转换，但是不进行特殊的数据检查和解构。它没有运行时的影响，只是在编译阶段起作用。TypeScript会假设你，程序员，已经进行了必须的检查。</p>
+<hr>
+<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p>接口就是用代码描述一个对象<strong>必须</strong>有什么属性或者方法，但是有没有其他属性或方法就不管。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Human &#123;</span><br><span class="line">    name: <span class="built_in">string</span>;</span><br><span class="line">    age: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> jack: Human = &#123;name: <span class="string">'jack'</span>, age: <span class="number">18</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接口用关键字<code>interface</code>来声明，例如上述代码，如果<code>jack</code>对象声明时少了<code>name</code>或者<code>age</code>属性，就会报错。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Head &#123;</span><br><span class="line">    eye: <span class="built_in">number</span>;</span><br><span class="line">    nose: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Human &#123;</span><br><span class="line">    readonly name: <span class="built_in">string</span>;</span><br><span class="line">    age: <span class="built_in">number</span>;</span><br><span class="line">    head: Head;</span><br><span class="line">    likedGame?: <span class="built_in">Array</span>&lt;<span class="built_in">string</span>&gt;</span><br><span class="line">    say(word: <span class="built_in">string</span>) : <span class="built_in">void</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> jsck: Human = &#123;</span><br><span class="line">    name: <span class="string">'jack'</span>,</span><br><span class="line">    age: <span class="number">18</span>,</span><br><span class="line">    head: &#123;eye: <span class="number">2</span>, nose: <span class="number">1</span>&#125;,</span><br><span class="line">    say(word: <span class="built_in">string</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(word)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">jack.name = <span class="string">'gavin'</span>  <span class="comment">// =&gt; error</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果一个接口内定义了必须还有对象，就类似上述再声明另一个接口；</li>
+<li>如果一个接口内定义了必须有一个方法，就类似上述在接口内部直接定一个方法；</li>
+<li>以上述代码为例，在接口定义时，在某一个属性前加一个<code>readonly</code>关键字，后面如果对<code>jsck</code>的<code>name</code>属性做修改就会<strong>报错</strong>；</li>
+<li>如果定义一个接口时，在某个属性后面加一个<code>？</code>，表述对象声明时可以不声明这个对象，类似上述代码种的<code>likedGame</code>；</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/TypeScript/" rel="tag"><i class="fa fa-tag"></i> TypeScript</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
-    </div>
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -344,6 +468,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -364,8 +492,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -450,6 +587,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#变量"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型断言"><span class="nav-number">1.2.</span> <span class="nav-text">类型断言</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#接口"><span class="nav-number">2.</span> <span class="nav-text">接口</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -592,6 +745,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
