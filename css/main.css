@@ -1547,7 +1547,6 @@ pre .javascript .function {
 }
 .posts-expand .post-tags {
   margin-top: 40px;
-  text-align: center;
 }
 .posts-expand .post-tags a {
   display: inline-block;
@@ -1820,7 +1819,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #4ffff7;
+  background: #3c14ff;
 }
 .links-of-blogroll {
   font-size: 13px;
