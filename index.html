@@ -378,9 +378,9 @@
 
       
         
-          
-          
-          
+          <h1 id="类"><a href="#类" class="headerlink" title="类"></a>类</h1><h2 id="类的声明"><a href="#类的声明" class="headerlink" title="类的声明"></a>类的声明</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Human &#123;</span><br><span class="line">    name: <span class="built_in">string</span>;</span><br><span class="line">    age: <span class="built_in">number</span>;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">name: <span class="built_in">string</span>, age: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;;</span><br><span class="line">    move() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'可以行走...'</span>)</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> jack = <span class="keyword">new</span> Human(<span class="string">'jack'</span>, <span class="number">18</span>)  <span class="comment">// jack ==&gt; &#123;'jack', 18&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>类的声明用<code>class</code>修饰符，内部可以使用构造器<code>constructor</code>，构造器<code>constructor</code>是一个函数，可以让我们用<code>new ...</code>来实例化一个对象，并且<code>constructor</code>的参数可以设置默认值；<code>Human</code>类内部可以定义方法，类似上述<code>move</code>函数。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/06/19/typescript-learning2/#more" rel="contents">
