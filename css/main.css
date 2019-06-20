@@ -1323,9 +1323,6 @@ pre .javascript .function {
 .posts-expand .post-body h6:hover .header-anchor {
   visibility: visible;
 }
-.posts-expand .post-body ul li {
-  list-style: circle;
-}
 .posts-expand .post-body img {
   box-sizing: border-box;
   margin: auto;
@@ -1823,7 +1820,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #207d75;
+  background: #4ffff7;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3047,10 +3044,10 @@ pre .javascript .function {
 .post-body h1 {
   font-size: 1.6em;
   border-bottom: 1px solid #eee;
+  color: #07b;
 }
 .post-body h2 {
   font-size: 1.45em;
-  border-bottom: 1px solid #eee;
 }
 .post-body h3 {
   font-size: 1.3em;
@@ -3123,4 +3120,11 @@ pre .javascript .function {
 }
 .posts-expand .post-tags a {
   border-bottom: none;
+}
+code {
+  color: #c7254e;
+  background: #f9f2f4;
+}
+.highlight {
+  margin: 10px 0 4px 0;
 }

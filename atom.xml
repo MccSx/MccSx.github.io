@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-06-19T14:53:37.178Z</updated>
+  <updated>2019-06-19T15:15:54.839Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>typescript-类</title>
+    <link href="http://yoursite.com/2019/06/19/typescript-learning2/"/>
+    <id>http://yoursite.com/2019/06/19/typescript-learning2/</id>
+    <published>2019-06-19T14:58:05.000Z</published>
+    <updated>2019-06-19T15:15:54.839Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="TypeScript学习" scheme="http://yoursite.com/categories/TypeScript%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+    
+      <category term="TypeScript" scheme="http://yoursite.com/tags/TypeScript/"/>
+    
+  </entry>
   
   <entry>
     <title>TypeScript基础</title>

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[typescript-类]]></title>
+    <url>%2F2019%2F06%2F19%2Ftypescript-learning2%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>TypeScript学习</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>TypeScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[TypeScript基础]]></title>
     <url>%2F2019%2F06%2F14%2Ftypescript-learning1%2F</url>
     <content type="text"><![CDATA[变量数据类型 JS七种数据类型（number、string、undefined、null、object、boolean、symbol） any1234let n1:number = 1n1 = '1' // errorlet n2:any = 2n2 = '2' // pass 如果一个变量在赋值时声明了是number，后面如果把不是number的数据赋值给n1，那就会报错；如果一个变量在赋值时声明的时any，后面可以把任何类型的数据赋值给n2 枚举(enum)1234567891011enum Gender &#123; Man, Woman &#125;let jack:Gender = Gender.Manconsole.log(jack) // =&gt; 0jack = Gender.Womanconsole.log(jack) // =&gt; 1enum Gender1 = &#123; Man='man', Woman='woman' &#125;let jack:Gender1 = Gender1.Manconsole.log(jack) // =&gt; 'man'jack = Gender1.Womanconsole.log(jack) // =&gt; 'woman' 枚举用关键字enum来声明，默认情况下，元素编号从0开始，所以第一种情况的jack值默认是0。也可以手动指定成员的数据，就类似上述第二种情况。如果在给jack赋值时，不小心赋值了类似于Gender.Men，这样就会报错； void代表空类型，一般用在没有返回值的函数声明时，类似于下述情况： 123function a(b: any): void &#123; console.log(a)&#125; never 小tips：默认情况下，null或undefined是所有类型的子类型，就是说可以把null或undefined赋值给number、string等类型的变量。 类型断言12345let str1: any = '123'console.log( (&lt;string&gt;str1).split('') ) // =&gt; passlet str2: any = '123'console.log( (str2 as string).split('') ) // =&gt; pass 有两种形式：1.&lt;string&gt;str 2.str2 as string通过类型断言这种方式可以告诉编译器，“相信我，我知道自己在干什么”。类型断言好比其它语言里的类型转换，但是不进行特殊的数据检查和解构。它没有运行时的影响，只是在编译阶段起作用。TypeScript会假设你，程序员，已经进行了必须的检查。 接口接口基础接口就是用代码描述一个对象必须有什么属性或者方法，但是有没有其他属性或方法就不管。 123456interface Human &#123; name: string; age: number;&#125;let jack: Human = &#123;name: 'jack', age: 18&#125; 接口用关键字interface来声明，例如上述代码，如果jack对象声明时少了name或者age属性，就会报错。 12345678910111213141516171819202122interface Head &#123; eye: number; nose: number;&#125;interface Human &#123; readonly name: string; age: number; head: Head; likedGame?: Array&lt;string&gt;; say(word: string) : void;&#125;let jsck: Human = &#123; name: 'jack', age: 18, head: &#123;eye: 2, nose: 1&#125;, say(word: string) &#123; console.log(word) &#125;&#125;jack.name = 'gavin' // =&gt; error 如果一个接口内定义了必须还有对象，就类似上述再声明另一个接口； 如果一个接口内定义了必须有一个方法，就类似上述在接口内部直接定一个方法； 以上述代码为例，在接口定义时，在某一个属性前加一个readonly关键字，后面如果对jsck的name属性做修改就会报错； 如果定义一个接口时，在某个属性后面加一个？，表述对象声明时可以不声明这个对象，类似上述代码种的likedGame； 接口描述函数1234567interface SearchFunc &#123; (a: string, b: string): boolean;&#125;let searchF = function (c: string, d: string): boolean &#123; // ...&#125; 由如上述代码定义一个描述函数的接口，注意：上述a、b并不与c、d有什么关系。 如果接口描述的函数，这个函数内也有一个属性也是函数？代码如下： 12345678910111213141516interface 二则运算 &#123; (a: number, b: number): number; 逆运算(a: number, b: number): number;&#125;let fn = ((): 二则运算 =&gt; &#123; let x: any = function(a: number, b: number): number &#123; return a + b; &#125;; x.逆运算 = function(a: number, b: number): number &#123; return a - b; &#125;; return x;&#125;)()let add: 二则运算 = fn(); 接口的继承12345678910111213141516// 1interface Animal &#123; move(): void;&#125;interface Human extends Animal &#123; name: string; age: number;&#125;let jack: Human = &#123; name: 'jack', age: 18, move() &#123; // ... &#125;&#125; 接口的继承用关键字extends来实现，上述代码中，如果声明jack时没有声明move方法就会报错。 1234567891011121314151617181920// 2interface Animal &#123; move(): void;&#125;interface Human &#123; name: string; age: number;&#125;interface Gen extends Human, Animal &#123; gender: string&#125;let jack: Gen = &#123; name: 'jack', age: 18, gender: 'man'; move() &#123; // ... &#125;&#125; 一个接口可以继承多个接口，由如上述代码Gen extends Human, Animal，继承的多个接口用逗号隔开；当然上述代码中，声明Human接口时也可以继承Animal=&gt;Human extends Animal。]]></content>
