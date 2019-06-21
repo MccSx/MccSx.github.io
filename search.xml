@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[typescript-泛型]]></title>
+    <url>%2F2019%2F06%2F20%2Ftypescript-learning4%2F</url>
+    <content type="text"><![CDATA[泛型泛型的使用123456function returnIt&lt;T&gt;(sth: T): T &#123; return sth;&#125;;let s = returnIt&lt;string&gt;('hi');let s2 = returnIt&lt;number&gt;('hello') // 报错了 泛型就是用一个东西表示广泛的类型，由如上述代码，在函数变量名returnIt后面加&lt;T&gt;，然后函数参数指定T类型，函数返回也是T类型，并且这个T可以写任意字母。returnIt&lt;number&gt;(&#39;hello&#39;)会报错，因为&#39;hello&#39;是string类型，但是函数调用时说明了接受number类型参数。 1234567891011function returnIt&lt;T&gt;(sth: T): T &#123; return sth;&#125;;interface Human &#123; name: string; age: number;&#125;let s = returnIt&lt;Human&gt;(&#123;name: 'jack', age: 18&#125;)let s1 = returnIt(&#123;name: 'jack', age: 18&#125;)let s2 = returnIt&lt;Human&gt;(&#123;name: 'jack'&#125;) // 报错 泛型和接口一起使用，由如上述代码，s s1都可以，s2会报错，因为传入函数的参数不符合接口的定义。 使用泛型变量123456function returnArray&lt;T&gt;(array: T[]): T[] &#123; return array;&#125;;let s = returnArray([1,2,3]);let s1 = returnArray('hi'); // 报错，因为'hi'不是一个数组 使用泛型类型，可以说明函数参数是一个广泛类型的数组（不关心这个数组内部是什么类型）。 泛型类12345678class GenericNumber&lt;T&gt; &#123; zeroValue: T; add: (x: T, y: T) =&gt; T;&#125;let myGenericNumber = new GenericNumber&lt;number&gt;();myGenericNumber.zeroValue = 0;myGenericNumber.add = function(x, y) &#123; return x + y; &#125;; 这个是官方文档的一个例子，当myGenericNumber实例化时，myGenericNumber内就有一个number类型的zeroValue属性，还有一个add方法，这个方法接收两个都是number类型的参数，返回值也是number类型。 泛型约束1234567891011121314151617// 1function returnIt&lt;T&gt;(sth: T): T &#123; console.log(sth.length); // 报错，sth没有length属性 return sth;&#125;;let s = returnIt&lt;string&gt;('hi');// 2interface hasLength &#123; length: number;&#125;function returnIt&lt;T extends hasLength&gt;(sth: T): T &#123; console.log(sth.length); return sth;&#125;;let s = returnIt&lt;string&gt;('hi'); 上述代码第一种情况下，泛型T并没有length属性，所以当访问length属性时，自然会报错，这就是对泛型的约束。第二种情况下，定义了一个具有length属性的接口，并且泛型T继承与接口hasLength，这样就不会报错了。]]></content>
+      <categories>
+        <category>TypeScript学习</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>TypeScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[TypeScript-函数]]></title>
     <url>%2F2019%2F06%2F20%2Ftypescript-learning3%2F</url>
     <content type="text"><![CDATA[函数函数其实也是对象，只是是一个特殊的对象，是可以被调用（call）的对象。]]></content>
