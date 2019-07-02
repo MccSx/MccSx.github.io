@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="ShiXiang&#39;s Notes">
 <meta property="og:description" content="函数函数其实也是对象，只是是一个特殊的对象，是可以被调用（call）的对象。 函数类型1234567function add(x: number, y: number): number &amp;#123;    return x + y;&amp;#125;ley add2 = function(x: number, y: number): number &amp;#123;    return x + y;&amp;#125">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-22T08:43:48.750Z">
+<meta property="og:updated_time" content="2019-06-25T02:53:01.900Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TypeScript-函数">
 <meta name="twitter:description" content="函数函数其实也是对象，只是是一个特殊的对象，是可以被调用（call）的对象。 函数类型1234567function add(x: number, y: number): number &amp;#123;    return x + y;&amp;#125;ley add2 = function(x: number, y: number): number &amp;#123;    return x + y;&amp;#125">
@@ -407,8 +407,8 @@
 <p>add函数在声明时并不需要声明返回值时什么类型，因为TS自己会推断函数的返回值是什么类型，所以当<code>s.split(&#39;&#39;)</code>时不会报错。</p>
 <h4 id="类型兼容"><a href="#类型兼容" class="headerlink" title="类型兼容"></a>类型兼容</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Human &#123;</span><br><span class="line">    name: <span class="built_in">string</span>;</span><br><span class="line">    age: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> human1: Human = &#123;name: <span class="string">'jack'</span>, age: <span class="number">18</span>, gender: <span class="string">'male'</span>&#125;; <span class="comment">//报错，因为对象不符合接口Human的定义，多了gender属性</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> x = &#123;name: <span class="string">'jack'</span>, age: <span class="number">18</span>, gender: <span class="string">'male'</span>&#125;;</span><br><span class="line"><span class="keyword">let</span> human2: Human = x;  <span class="comment">//这里不会报错，pass</span></span><br></pre></td></tr></table></figure>
 
-<p>至于这样设计的目的，应该是可以让我们少些一些代码。</p>
-
+<p>至于这样设计的目的，应该是可以让我们少些一些代码，节约类型的个数。</p>
+<h4 id="Unsound"><a href="#Unsound" class="headerlink" title="Unsound"></a>Unsound</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> EventType &#123; Mouse, Keyboard &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Event &#123; timestamp: <span class="built_in">number</span>; &#125;</span><br><span class="line"><span class="keyword">interface</span> MouseEvent <span class="keyword">extends</span> Event &#123; x: <span class="built_in">number</span>; y: <span class="built_in">number</span> &#125;</span><br><span class="line"><span class="keyword">interface</span> KeyEvent <span class="keyword">extends</span> Event &#123; keyCode: <span class="built_in">number</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">listenEvent</span>(<span class="params">eventType: EventType, handler: (n: Event) =&gt; <span class="built_in">void</span></span>) </span>&#123;</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Unsound, but useful and common</span></span><br><span class="line">listenEvent(EventType.Mouse, <span class="function">(<span class="params">e: MouseEvent</span>) =&gt;</span> <span class="built_in">console</span>.log(e.x + <span class="string">','</span> + e.y));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Undesirable alternatives in presence of soundness</span></span><br><span class="line">listenEvent(EventType.Mouse, <span class="function">(<span class="params">e: Event</span>) =&gt;</span> <span class="built_in">console</span>.log((&lt;MouseEvent&gt;e).x + <span class="string">','</span> + (&lt;MouseEvent&gt;e).y));</span><br><span class="line">listenEvent(EventType.Mouse, &lt;<span class="function">(<span class="params">e: Event</span>) =&gt;</span> <span class="built_in">void</span>&gt;<span class="function">(<span class="params">(<span class="params">e: MouseEvent</span>) =&gt; <span class="built_in">console</span>.log(<span class="params">e.x + ',' + e.y</span>)</span>));</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">// <span class="params">Still</span> <span class="params">disallowed</span> (<span class="params">clear error</span>). <span class="params">Type</span> <span class="params">safety</span> <span class="params">enforced</span> <span class="params">for</span> <span class="params">wholly</span> <span class="params">incompatible</span> <span class="params">types</span></span></span><br><span class="line"><span class="function"><span class="params">listenEvent</span>(<span class="params">EventType.Mouse, (<span class="params">e: <span class="built_in">number</span></span>) =&gt; <span class="built_in">console</span>.log(<span class="params">e</span>)</span>);  // 报错</span></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -450,8 +450,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/06/20/typescript-learning4/" rel="prev" title="typescript-泛型">
-                typescript-泛型 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/06/20/typescript-learning4/" rel="prev" title="TypeScript-泛型">
+                TypeScript-泛型 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -531,7 +531,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -553,7 +553,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -609,7 +609,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#函数"><span class="nav-number">1.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数类型"><span class="nav-number">1.1.</span> <span class="nav-text">函数类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可选参数和默认参数"><span class="nav-number">1.2.</span> <span class="nav-text">可选参数和默认参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#剩余参数"><span class="nav-number">1.3.</span> <span class="nav-text">剩余参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this和箭头函数"><span class="nav-number">1.4.</span> <span class="nav-text">this和箭头函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的重载"><span class="nav-number">1.5.</span> <span class="nav-text">函数的重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展"><span class="nav-number">1.6.</span> <span class="nav-text">拓展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类型推断"><span class="nav-number">1.6.0.1.</span> <span class="nav-text">类型推断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型兼容"><span class="nav-number">1.6.0.2.</span> <span class="nav-text">类型兼容</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#函数"><span class="nav-number">1.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数类型"><span class="nav-number">1.1.</span> <span class="nav-text">函数类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可选参数和默认参数"><span class="nav-number">1.2.</span> <span class="nav-text">可选参数和默认参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#剩余参数"><span class="nav-number">1.3.</span> <span class="nav-text">剩余参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this和箭头函数"><span class="nav-number">1.4.</span> <span class="nav-text">this和箭头函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的重载"><span class="nav-number">1.5.</span> <span class="nav-text">函数的重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展"><span class="nav-number">1.6.</span> <span class="nav-text">拓展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类型推断"><span class="nav-number">1.6.0.1.</span> <span class="nav-text">类型推断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型兼容"><span class="nav-number">1.6.0.2.</span> <span class="nav-text">类型兼容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Unsound"><span class="nav-number">1.6.0.3.</span> <span class="nav-text">Unsound</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
