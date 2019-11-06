@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="ShiXiang&#39;s Notes">
 <meta property="og:description" content="项目构建12345npx create-react-app my-app --typescript// oryarn create react-app my-app --typescript  安装完成后，cd my-app，然后yarn start，这样项目就正式启动了。 工程目录结构不同点 入口文件还是index文件，不过由之前的index.jsx变成了index.tsx； 所有的组件之前是.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-02T08:54:35.597Z">
+<meta property="og:updated_time" content="2019-07-06T14:22:19.008Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TypeScript+React入门">
 <meta name="twitter:description" content="项目构建12345npx create-react-app my-app --typescript// oryarn create react-app my-app --typescript  安装完成后，cd my-app，然后yarn start，这样项目就正式启动了。 工程目录结构不同点 入口文件还是index文件，不过由之前的index.jsx变成了index.tsx； 所有的组件之前是.">
@@ -409,7 +409,7 @@
 
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Button.tsx</span></span><br><span class="line"><span class="keyword">interface</span> IProps &#123;</span><br><span class="line">    size: <span class="built_in">string</span>;</span><br><span class="line">    onClick: React.MouseEventHandler;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> IState &#123;</span><br><span class="line">    n: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Button <span class="keyword">extends</span> React.Component&lt;IProps, IState&gt; &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">props: IProps</span>) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">        <span class="keyword">this</span>.state = &#123;</span><br><span class="line">            n: <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div className=<span class="string">"btn"</span> onClick=&#123;<span class="keyword">this</span>.props.onClick&#125;&gt;&#123;<span class="keyword">this</span>.props.children&#125;&#123;<span class="keyword">this</span>.state.n&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        );</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>如上述代码，<code>Button</code>组件中需要定义函数类型，由于是一个鼠标事件，定义为<code>React.MouseEventHandler</code>；在App文件中，在函数中使用<code>e</code>这个参数，也需要定义类型为<code>React.MouseEvent</code></p>
+<p>如上述代码，<code>Button</code>组件中需要定义函数类型，由于是一个鼠标事件，定义为<code>React.MouseEventHandler</code>；在App文件中，在函数中使用<code>e</code>这个参数，也需要定义类型为<code>React.MouseEvent</code>。</p>
 
       
     </div>
@@ -453,6 +453,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/06/react造轮子-1/" rel="prev" title="React造轮子-项目搭建">
+                React造轮子-项目搭建 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -531,7 +535,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -542,7 +546,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -553,7 +557,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
