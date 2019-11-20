@@ -23,6 +23,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[React useState]]></title>
+    <url>%2F2019%2F07%2F14%2FuseState%2F</url>
+    <content type="text"><![CDATA[useState基础用法1234567891011function App() &#123; const [n, setN] = React.useState(0) return ( &lt;div className="app"&gt; &lt;p&gt;&#123;n&#125;&lt;/p&gt; &lt;button onClick=&#123;() =&gt; setN(n + 1)&#125;&gt;n+1&lt;/button&gt; &lt;/div&gt; )&#125;ReactDOM.render(&lt;App /&gt;, rootElement) 首次渲染：render &lt;App /&gt;，调用App函数，得到虚拟div（一个对象），创建真实div； 当点击button时，会调用setN函数，再次 render &lt;App /&gt;； 再次调用App函数，得到虚拟div，DOM diff更新真实div；每次运行App函数，都会运行useState(0)，由此看似运行useState(0)，变量n又是0，但其实不然，第二次调用时n变为了1。分析一下： setN一定会修改某个数据x，把n+1的值存入x； setN一定会出发App()，重新渲染； useState肯定会从数据x里读取n的最新值； 那每个组件应该会有自己的一个数据x，暂时将其命名为state]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[React造轮子-项目搭建]]></title>
     <url>%2F2019%2F07%2F06%2Freact%E9%80%A0%E8%BD%AE%E5%AD%90-1%2F</url>
     <content type="text"><![CDATA[创建目录与远程仓库在GitHub上新建一个远程仓库，创建时添加readme文件，然后使用git clone把远程仓库克隆到本地。 npm初始化进入到本地的项目目录，使用npm init -y命令，在本地新建一个package.json文件。 安装webpack使用yarn add webpack webpack-cli --dev命令，dev的意思就是安装到开发者的依赖里边，也就是在package.json文件中多了一个devDependenceies属性。 新建lib/index.tsx文件在项目目录下，新建一个lib目录，lib目录下新建一个index.tsx文件，在文件内先随意写一行log代码。 新建webpack.config.js在项目目录下新建一个webpack.config.js文件，然后配置webpack： 1234567891011121314151617181920const path = require('path')module.exports = &#123; mode: 'production', entry: &#123; index: './lib/index.tsx' &#125;, output: &#123; path: path.resolve(__dirname, 'dist/lib'), library: 'XinChen UI', libraryTarget: 'umd' &#125;, module: &#123; rules: [ &#123; test: /\.tsx?$/, loader: 'awesome-typescript-loader' &#125; ] &#125;&#125; 配置entry，这表示项目代码入口在哪里，目前先定为lib目录下的index.tsx文件； 配置output，这表示项目打包后所放置代码的位置，这里的libray表示项目最终的名称叫什么，librayTarget表示我们自己的库的格式是什么，； 配置mudules.rules，首先要处理.tsx文件，配置了awesome-typescript-loader这个loader，配置完后需要安装这个loader：yarn add awesome-typescript-loader --dev(安装所有的loader都是后面加--dev，因为loader只有开发者用到)； 安装typescript：yarn add typescript --dev，添加tsconfig.json和tslint.json文件; 配置mode，一般mode值为production或者development，第一次先设置为production； 安装webpack-dev-server与配置webpack.config.dev.js首先安装webpack-dev-server：yarn add webpack-dev-server --dev，这样就可以使用命令npx webpack-devserver来启动项目；安装html-webpack-plugin：yarn add html-webpack-plugin --dev，然后在webpack.config.js文件中添加下面代码： 12345678910const HtmlWebpackPlugin = require('html-webpack-plugin');modules.exports = &#123; // ... plugins: [ new HtmlWebpackPlugin(&#123; title: 'XinChen UI', template: 'index.html' &#125;) ]&#125; 这样使用命令npx webpack-dev-server，浏览器会启动localhost:8080域名，打开项目目录下的index.html文件，并且这个html文件会自动使用lib目录下的index.tsx文件作为js文件。接下来，在package.json文件内，scripts中添加如下两行代码： 12"start": "webpack-dev-server","build": "webpack" 这样我们启动项目是可以使用yarn start命令，打包项目可以使用yarn build命令。 使用React首先安装react和react-dom：yarn add react react-dom，安装完成后，如果直接使用React，会报一个错误提示： 12无法找到模块“react”的声明文件。“/Users/xinchen/Public/self_work/XinChen-UI/node_modules/react/index.js”隐式拥有 "any" 类型。Try `npm install @types/react` if it exists or add a new declaration (.d.ts) file containing `declare module 'react';`ts(7016) 错误提示很明显，没有安装@types/react，所以需要继续安装@types/react和@types/react-dom：yarn add @types/react @types/react-dom --dev。 在webpack.config.json文件内增加一个配置： 123456modules.exports = &#123; // ... resolve: &#123; extensions: ['.ts', '.tsx', '.js'. '.jsx'] &#125;&#125; 这样，当我们引入上述四种文件时才能正常引用。在yarn start的时候，会有一个警告，说index.js文件太大，这个需要在webpack.config.json文件中把mode值改为development，这样在开发模式下，不会管index.js是不是太大了。 1234567891011121314151617modules.exports = &#123; // ... enternals: &#123; react: &#123; commonjs: 'react', commonjs2: 'react', amd: 'react', root: 'React', &#125;, 'react-dom': &#123; commonjs: 'react-dom', commonjs2: 'react-dom', amd: 'react-dom', root: 'ReactDom', &#125; &#125;&#125; 再在webpack.config.json文件中加入上述代码，意思就是告诉webpack，enternals内的是外部的库，这样打包的index.js文件就不会包含react的代码。 配置webpack.config.dev.js和webpack.config,prod.js123456789101112131415161718192021222324// webpack.config.jsconst path = require('path');module.exports = &#123; entry: &#123; index: './lib/index.tsx' &#125;, output: &#123; path: path.resolve(__dirname, './dist/lib'), library: 'XinChen UI', libraryTarget: 'umd' &#125;, resolve: &#123; extensions: ['.ts', '.tsx', '.js', '.jsx'] &#125;, module: &#123; rules: [ &#123; test: /\.tsx?$/, loader: 'awesome-typescript-loader' &#125; ] &#125;&#125; 12345678910111213// webpack.config.dev.jsconst base = require('./webpack.config');const HtmlWebpackPlugin = require('html-webpack-plugin');module.exports = Object.assign(&#123;&#125;, base, &#123; mode: 'development', plugins: [ new HtmlWebpackPlugin(&#123; title: 'XinChen UI', template: 'index.html' &#125;) ],&#125;) 1234567891011121314151617181920// webpack.config.prod.jsconst base = require('./webpack.config');module.exports = Object.assign(&#123;&#125;, base, &#123; mode: 'production', enternals: &#123; react: &#123; commonjs: 'react', commonjs2: 'react', amd: 'react', root: 'React', &#125;, 'react-dom': &#123; commonjs: 'react-dom', commonjs2: 'react-dom', amd: 'react-dom', root: 'ReactDom', &#125; &#125;&#125;) 三个webpack配置代码如上述所示，webpack.config.js文件是共有的配置，webpack.config.dev.js是开发环境配置，webpack.config.prod.js文件是生产环境配置。同时还需要修改package.json文件如下代码： 12345"scripts": &#123; //... "start": "webpack-dev-server --config webpack.config.dev.js", "build": "webpack --config webpack.config.prod.js"&#125;, 打包生产.d.ts文件在tsconfig.json文件这加入这么一行：&quot;outDir&quot;: &quot;dist&quot;，这样重新打包后，dist目录下就会有index.d.ts和Button.d.ts文件（其实Button.d.ts文件是不需要的），那如何去掉这个文件呢，在这里先挖个坑。 配置Jest单元测试 运行： 1yarn add --dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer 在根目录下添加.babelrc文件，在文件内添加如下代码： 12345&#123; "presets": [ "react-app" ]&#125; 在package.json文件内的scripts中添加如下一行代码： 1"test": "cross-env NODE_ENV=test jest --config=jest.config.js --runInBand" 添加jest.config.js文件，在文件内添加如下代码： 12345678910111213141516171819202122module.exports = &#123; verbose: true, clearMocks: false, collectCoverage: false, reporters: ["default"], moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'], moduleDirectories: ['node_modules'], globals: &#123; 'ts-jest': &#123; tsConfig: 'tsconfig.test.json', &#125;, &#125;, moduleNameMapper: &#123; "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "&lt;rootDir&gt;/test/__mocks__/file-mock.js", &#125;, testMatch: ['&lt;rootDir&gt;/**/__tests__/**/*.unit.(js|jsx|ts|tsx)'], transform: &#123; "^.+unit\\.(js|jsx)$": "babel-jest", '^.+\\.(ts|tsx)$': 'ts-jest', &#125;, setupFilesAfterEnv: ["&lt;rootDir&gt;test/setupTests.js"]&#125; 安装ts-jest：yarn add ts-jest --dev，并且创建test目录，并在这个目录下创建一个setupTests.js文件，目前这个文件暂时是空的。 安装@types/jest：yarn add @types/jest --dev; 在根目录下创建一个tsconfig.test.json文件，并在该文件下添加如下代码： 123&#123; "extends": "./tsconfig.json"&#125;]]></content>
@@ -43,8 +54,8 @@
         <category>TypeScript学习</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
         <tag>TypeScript</tag>
+        <tag>JavaScript</tag>
         <tag>Vue</tag>
       </tags>
   </entry>
@@ -56,8 +67,8 @@
         <category>TypeScript学习</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
         <tag>TypeScript</tag>
+        <tag>JavaScript</tag>
         <tag>Vue</tag>
       </tags>
   </entry>
@@ -69,8 +80,8 @@
         <category>TypeScript学习</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
         <tag>TypeScript</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -81,8 +92,8 @@
         <category>TypeScript学习</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
         <tag>TypeScript</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -93,8 +104,8 @@
         <category>TypeScript学习</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
         <tag>TypeScript</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -105,8 +116,8 @@
         <category>TypeScript学习</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
         <tag>TypeScript</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
 </search>
