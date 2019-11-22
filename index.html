@@ -516,9 +516,9 @@
       
         
           
-          使用React.FunctionComponent与接收props1234567891011import React from 'react';interface IconProps &#123;    name: string;&#125;const Icon: React.FunctionComponent&lt;IconProps&gt; = (props) =&gt; &#123;    return &lt;span&gt;&#123;props.name&#125;&lt;/span&gt;&#125;export default Icon;
+          使用 React.FunctionComponent 与接收 props1234567891011import React from "react";interface IconProps &#123;  name: string;&#125;const Icon: React.FunctionComponent&lt;IconProps&gt; = props =&gt; &#123;  return &lt;span&gt;&#123;props.name&#125;&lt;/span&gt;;&#125;;export default Icon;
 
-使用function定义一个组件时，
+使用 function 定义一个组件时
           ...
           <!--noindex-->
           <div class="post-button text-center">

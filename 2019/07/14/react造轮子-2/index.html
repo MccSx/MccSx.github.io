@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="使用React.FunctionComponent与接收props1234567891011import React from &apos;react&apos;;interface IconProps &amp;#123;    name: string;&amp;#125;const Icon: React.FunctionComponent&amp;lt;IconProps&amp;gt; = (props) =&amp;gt; &amp;#123;">
+<meta name="description" content="使用 React.FunctionComponent 与接收 props1234567891011import React from &quot;react&quot;;interface IconProps &amp;#123;  name: string;&amp;#125;const Icon: React.FunctionComponent&amp;lt;IconProps&amp;gt; = props =&amp;gt; &amp;#123;  ret">
 <meta name="keywords" content="TypeScript,React">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react造轮子-Icon组件">
 <meta property="og:url" content="http://yoursite.com/2019/07/14/react造轮子-2/index.html">
 <meta property="og:site_name" content="ShiXiang&#39;s Notes">
-<meta property="og:description" content="使用React.FunctionComponent与接收props1234567891011import React from &apos;react&apos;;interface IconProps &amp;#123;    name: string;&amp;#125;const Icon: React.FunctionComponent&amp;lt;IconProps&amp;gt; = (props) =&amp;gt; &amp;#123;">
+<meta property="og:description" content="使用 React.FunctionComponent 与接收 props1234567891011import React from &quot;react&quot;;interface IconProps &amp;#123;  name: string;&amp;#125;const Icon: React.FunctionComponent&amp;lt;IconProps&amp;gt; = props =&amp;gt; &amp;#123;  ret">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-31T15:04:44.535Z">
+<meta property="og:updated_time" content="2019-11-22T03:50:13.984Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react造轮子-Icon组件">
-<meta name="twitter:description" content="使用React.FunctionComponent与接收props1234567891011import React from &apos;react&apos;;interface IconProps &amp;#123;    name: string;&amp;#125;const Icon: React.FunctionComponent&amp;lt;IconProps&amp;gt; = (props) =&amp;gt; &amp;#123;">
+<meta name="twitter:description" content="使用 React.FunctionComponent 与接收 props1234567891011import React from &quot;react&quot;;interface IconProps &amp;#123;  name: string;&amp;#125;const Icon: React.FunctionComponent&amp;lt;IconProps&amp;gt; = props =&amp;gt; &amp;#123;  ret">
 
 
 
@@ -387,9 +387,28 @@
       
 
       
-        <h2 id="使用React-FunctionComponent与接收props"><a href="#使用React-FunctionComponent与接收props" class="headerlink" title="使用React.FunctionComponent与接收props"></a>使用React.FunctionComponent与接收props</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> IconProps &#123;</span><br><span class="line">    name: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Icon: React.FunctionComponent&lt;IconProps&gt; = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &lt;span&gt;&#123;props.name&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Icon;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="使用-React-FunctionComponent-与接收-props"><a href="#使用-React-FunctionComponent-与接收-props" class="headerlink" title="使用 React.FunctionComponent 与接收 props"></a>使用 React.FunctionComponent 与接收 props</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> IconProps &#123;</span><br><span class="line">  name: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Icon: React.FunctionComponent&lt;IconProps&gt; = <span class="function"><span class="params">props</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &lt;span&gt;&#123;props.name&#125;&lt;<span class="regexp">/span&gt;;</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Icon;</span></span><br></pre></td></tr></table></figure>
 
-<p>使用function定义一个组件时，需要使用<code>React.FunctionComponent</code>来指定组件的类型。如果要定义组件的<code>props</code>是符合哪个接口，就需要在<code>React.FunctionComponent</code>后面加<code>&lt;&#39;已定义好的interface&#39;&gt;</code>。这样定义后，在使用Icon组件时，name属性传错是就会自动报错。</p>
+<p>使用 function 定义一个组件时，需要使用<code>React.FunctionComponent</code>来指定组件的类型。如果要定义组件的<code>props</code>是符合哪个接口，就需要在<code>React.FunctionComponent</code>后面加<code>&lt;&#39;已定义好的interface&#39;&gt;</code>。这样定义后，在使用 Icon 组件时，name 属性传错是就会自动报错。</p>
+<h2 id="引入-svg-文件"><a href="#引入-svg-文件" class="headerlink" title="引入 svg 文件"></a>引入 svg 文件</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> wechat <span class="keyword">from</span> <span class="string">"./icon/wechat.svg"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>首先引入 svg 文件，这时候会报错，需要安装相应的 loader，并且 webpack 和 tsconfig 都需要做配置。</p>
+<ul>
+<li>安装<code>svg-sprite-loader</code>，并且在<code>webpack.config.js</code>文件做出相应 loader 配置</li>
+<li>在 types 目录下的<code>custom.d.ts</code>文件中添加配置声明</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">declare <span class="built_in">module</span> <span class="string">'*.svg'</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> content: any;</span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">default</span> content;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在<code>tsconfig.json</code>文件内添加如下规则</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"include"</span>: [</span><br><span class="line">    <span class="string">"lib/**/*"</span>,</span><br><span class="line">    <span class="string">"types/**/*"</span></span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+
+<h2 id="在标签内使用-svg-文件"><a href="#在标签内使用-svg-文件" class="headerlink" title="在标签内使用 svg 文件"></a>在标签内使用 svg 文件</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"./icon/wechat.svg"</span>;</span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"></span><br><span class="line">interface IconProps &#123;</span><br><span class="line">  name: string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Icon: React.FunctionComponent&lt;IconProps&gt; = <span class="function"><span class="params">props</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">      &lt;span&gt;</span><br><span class="line">          &lt;svg&gt;</span><br><span class="line">              &lt;use xlinkHref=<span class="string">"#wechat"</span>&#125;&lt;<span class="regexp">/use&gt;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>svg&gt;</span><br><span class="line">      &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Icon;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="让-Icon-组件响应所有事件"><a href="#让-Icon-组件响应所有事件" class="headerlink" title="让 Icon 组件响应所有事件"></a>让 Icon 组件响应所有事件</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">interface IconProps extends React.SVGAttributes&lt;SVGElement&gt; &#123;</span><br><span class="line">  name: string;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>IconProps</code>这个接口，不可能把所有事件都定义一遍，因为事件太多了，只需<code>IconProps</code>接口继承与<code>React.SVGAttributes&lt;SVGElement&gt;</code>就可以。</p>
 
       
     </div>
@@ -591,7 +610,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用React-FunctionComponent与接收props"><span class="nav-number">1.</span> <span class="nav-text">使用React.FunctionComponent与接收props</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-React-FunctionComponent-与接收-props"><span class="nav-number">1.</span> <span class="nav-text">使用 React.FunctionComponent 与接收 props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入-svg-文件"><span class="nav-number">2.</span> <span class="nav-text">引入 svg 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在标签内使用-svg-文件"><span class="nav-number">3.</span> <span class="nav-text">在标签内使用 svg 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#让-Icon-组件响应所有事件"><span class="nav-number">4.</span> <span class="nav-text">让 Icon 组件响应所有事件</span></a></li></ol></div>
             
 
           </div>
