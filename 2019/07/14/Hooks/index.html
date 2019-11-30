@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="React,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ShiXiang's Notes" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="useState使用状态12const [n, setN] = React.useStaet(0);const [user, setUser] = React.useState(&amp;#123; name: &quot;F&quot; &amp;#125;);   注意事项：不可局部更新，地址要变  123456789101112131415function App() &amp;#123;  const [user, setUser]">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Hooks">
+<meta property="og:url" content="http://yoursite.com/2019/07/14/Hooks/index.html">
+<meta property="og:site_name" content="ShiXiang&#39;s Notes">
+<meta property="og:description" content="useState使用状态12const [n, setN] = React.useStaet(0);const [user, setUser] = React.useState(&amp;#123; name: &quot;F&quot; &amp;#125;);   注意事项：不可局部更新，地址要变  123456789101112131415function App() &amp;#123;  const [user, setUser]">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-29T09:29:33.394Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React Hooks">
+<meta name="twitter:description" content="useState使用状态12const [n, setN] = React.useStaet(0);const [user, setUser] = React.useState(&amp;#123; name: &quot;F&quot; &amp;#125;);   注意事项：不可局部更新，地址要变  123456789101112131415function App() &amp;#123;  const [user, setUser]">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/14/Hooks/">
+
+
+
+
+
+  <title>React Hooks | ShiXiang's Notes</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ShiXiang's Notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Quick notes</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/Hooks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shi Xiang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ShiXiang's Notes">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React Hooks</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-14T23:43:00+08:00">
+                2019-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="useState"><a href="#useState" class="headerlink" title="useState"></a>useState</h1><h2 id="使用状态"><a href="#使用状态" class="headerlink" title="使用状态"></a>使用状态</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [n, setN] = React.useStaet(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">const</span> [user, setUser] = React.useState(&#123; <span class="attr">name</span>: <span class="string">"F"</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意事项：不可局部更新，地址要变</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [user, setUser] = useState(&#123; <span class="attr">name</span>: <span class="string">"Frank"</span>, <span class="attr">age</span>: <span class="number">18</span> &#125;);</span><br><span class="line">  <span class="keyword">const</span> onClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    setUser(&#123;</span><br><span class="line">      name: <span class="string">"Jack"</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;h1&gt;&#123;user.name&#125;&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">      &lt;h2&gt;&#123;user.age&#125;&lt;/</span>h2&gt;</span><br><span class="line">      &lt;button onClick=&#123;onClick&#125;&gt;Click&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>如果是这样更新<code>user</code>对象，实际并未更新，需要重新一个对象传给<code>setUser</code>函数，实际上，<code>setState(obj)</code>如果<code>obj</code>地址不变，那么 React 就认为数据没有变化。通常以<code>setUser({...user, name: &#39;Jack&#39;})</code>的方式来更新。因为<code>setState</code>不会帮我们合并属性，其实<code>useReducer</code>也不会合并属性。</p>
+<h2 id="useState-接受函数"><a href="#useState-接受函数" class="headerlink" title="useState 接受函数"></a>useState 接受函数</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [state, setState] = useState(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> initialState;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>该函数返回初始<code>state</code>，并且只执行一次</p>
+<h2 id="setState-接受函数"><a href="#setState-接受函数" class="headerlink" title="setState 接受函数"></a>setState 接受函数</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [n, setN] = useState(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">const</span> onClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    setN(n + <span class="number">1</span>);</span><br><span class="line">    setN(n + <span class="number">1</span>); <span class="comment">// 你会发现 n 不能加 2</span></span><br><span class="line">    <span class="comment">// setN(i=&gt;i+1)</span></span><br><span class="line">    <span class="comment">// setN(i=&gt;i+1)</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;h1&gt;n: &#123;n&#125;&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;button onClick=&#123;onClick&#125;&gt;+2&lt;/</span>button&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>在这种时候，需要不止一次调用的时候，就需要传函数来实现，如果能接受这种形式，应该优先使用这种式。</p>
+<h1 id="useReducer"><a href="#useReducer" class="headerlink" title="useReducer"></a>useReducer</h1><h2 id="使用-useReducer，用来践行-Flux-Redux-的思想"><a href="#使用-useReducer，用来践行-Flux-Redux-的思想" class="headerlink" title="使用 useReducer，用来践行 Flux/Redux 的思想"></a>使用 useReducer，用来践行 Flux/Redux 的思想</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> initial = &#123;</span><br><span class="line">  n: <span class="number">0</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> reducer = <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (action.type === <span class="string">"add"</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">n</span>: state.n + action.number &#125;;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (action.type === <span class="string">"multi"</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">n</span>: state.n * <span class="number">2</span> &#125;;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"unknown type"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [state, dispatch] = useReducer(reducer, initial);</span><br><span class="line">  <span class="keyword">const</span> &#123; n &#125; = state;</span><br><span class="line">  <span class="keyword">const</span> onClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    dispatch(&#123; <span class="attr">type</span>: <span class="string">"add"</span>, <span class="attr">number</span>: <span class="number">1</span> &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">const</span> onClick2 = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    dispatch(&#123; <span class="attr">type</span>: <span class="string">"add"</span>, <span class="attr">number</span>: <span class="number">2</span> &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;h1&gt;n: &#123;n&#125;&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;button onClick=&#123;onClick&#125;&gt;+1&lt;/</span>button&gt;</span><br><span class="line">      &lt;button onClick=&#123;onClick2&#125;&gt;+<span class="number">2</span>&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>创建初始值<code>initialState</code>；</li>
+<li>创建所有操作<code>reducer(state, action)</code>；</li>
+<li>传给<code>useReducer</code>，得到读和写 API；</li>
+<li>调用 =&gt; <code>({ type: &#39;操作类型&#39; })</code><br>总的来说，<code>useReducer</code>是<code>useState</code>的复杂版</li>
+</ol>
+<h2 id="如何代替-Redux"><a href="#如何代替-Redux" class="headerlink" title="如何代替 Redux"></a>如何代替 Redux</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> store = &#123;</span><br><span class="line">  user: <span class="literal">null</span>,</span><br><span class="line">  books: <span class="literal">null</span>,</span><br><span class="line">  movies: <span class="literal">null</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reducer</span>(<span class="params">state, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">"setUser"</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123; ...state, <span class="attr">user</span>: action.user &#125;;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">"setBooks"</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123; ...state, <span class="attr">books</span>: action.books &#125;;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">"setMovies"</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123; ...state, <span class="attr">movies</span>: action.movies &#125;;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Context = React.createContext(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [state, dispatch] = useReducer(reducer, store);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> api = &#123; state, dispatch &#125;;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;Context.Provider value=&#123;api&#125;&gt;</span><br><span class="line">      &lt;User /&gt;</span><br><span class="line">      &lt;hr /&gt;</span><br><span class="line">      &lt;Books /&gt;</span><br><span class="line">      &lt;Movies /&gt;</span><br><span class="line">    &lt;<span class="regexp">/Context.Provider&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">function User() &#123;</span></span><br><span class="line"><span class="regexp">  const &#123; state, dispatch &#125; = useContext(Context);</span></span><br><span class="line"><span class="regexp">  useEffect(() =&gt; &#123;</span></span><br><span class="line"><span class="regexp">    ajax("/u</span>ser<span class="string">").then(user =&gt; &#123;</span></span><br><span class="line"><span class="string">      dispatch(&#123; type: "</span>setUser<span class="string">", user: user &#125;);</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">  &#125;, []);</span></span><br><span class="line"><span class="string">  return (</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">      &lt;h1&gt;个人信息&lt;/h1&gt;</span></span><br><span class="line"><span class="string">      &lt;div&gt;name: &#123;state.user ? state.user.name : "</span><span class="string">"&#125;&lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  );</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">function Books() &#123;</span></span><br><span class="line"><span class="string">  const &#123; state, dispatch &#125; = useContext(Context);</span></span><br><span class="line"><span class="string">  useEffect(() =&gt; &#123;</span></span><br><span class="line"><span class="string">    ajax("</span>/books<span class="string">").then(books =&gt; &#123;</span></span><br><span class="line"><span class="string">      dispatch(&#123; type: "</span>setBooks<span class="string">", books: books &#125;);</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">  &#125;, []);</span></span><br><span class="line"><span class="string">  return (</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">      &lt;h1&gt;我的书籍&lt;/h1&gt;</span></span><br><span class="line"><span class="string">      &lt;ol&gt;</span></span><br><span class="line"><span class="string">        &#123;state.books</span></span><br><span class="line"><span class="string">          ? state.books.map(book =&gt; &lt;li key=&#123;book.id&#125;&gt;&#123;book.name&#125;&lt;/li&gt;)</span></span><br><span class="line"><span class="string">          : "</span>加载中<span class="string">"&#125;</span></span><br><span class="line"><span class="string">      &lt;/ol&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  );</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">function Movies() &#123;</span></span><br><span class="line"><span class="string">  const &#123; state, dispatch &#125; = useContext(Context);</span></span><br><span class="line"><span class="string">  useEffect(() =&gt; &#123;</span></span><br><span class="line"><span class="string">    ajax("</span>/movies<span class="string">").then(movies =&gt; &#123;</span></span><br><span class="line"><span class="string">      dispatch(&#123; type: "</span>setMovies<span class="string">", movies: movies &#125;);</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">  &#125;, []);</span></span><br><span class="line"><span class="string">  return (</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">      &lt;h1&gt;我的电影&lt;/h1&gt;</span></span><br><span class="line"><span class="string">      &lt;ol&gt;</span></span><br><span class="line"><span class="string">        &#123;state.movies</span></span><br><span class="line"><span class="string">          ? state.movies.map(movie =&gt; &lt;li key=&#123;movie.id&#125;&gt;&#123;movie.name&#125;&lt;/li&gt;)</span></span><br><span class="line"><span class="string">          : "</span>加载中<span class="string">"&#125;</span></span><br><span class="line"><span class="string">      &lt;/ol&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  );</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">const rootElement = document.getElementById("</span>root<span class="string">");</span></span><br><span class="line"><span class="string">ReactDOM.render(&lt;App /&gt;, rootElement);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 帮助函数</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// 假 ajax</span></span><br><span class="line"><span class="string">// 两秒钟后，根据 path 返回一个对象，必定成功不会失败</span></span><br><span class="line"><span class="string">function ajax(path) &#123;</span></span><br><span class="line"><span class="string">  return new Promise((resolve, reject) =&gt; &#123;</span></span><br><span class="line"><span class="string">    setTimeout(() =&gt; &#123;</span></span><br><span class="line"><span class="string">      if (path === "</span>/user<span class="string">") &#123;</span></span><br><span class="line"><span class="string">        resolve(&#123;</span></span><br><span class="line"><span class="string">          id: 1,</span></span><br><span class="line"><span class="string">          name: "</span>Frank<span class="string">"</span></span><br><span class="line"><span class="string">        &#125;);</span></span><br><span class="line"><span class="string">      &#125; else if (path === "</span>/books<span class="string">") &#123;</span></span><br><span class="line"><span class="string">        resolve([</span></span><br><span class="line"><span class="string">          &#123;</span></span><br><span class="line"><span class="string">            id: 1,</span></span><br><span class="line"><span class="string">            name: "</span>JavaScript 高级程序设计<span class="string">"</span></span><br><span class="line"><span class="string">          &#125;,</span></span><br><span class="line"><span class="string">          &#123;</span></span><br><span class="line"><span class="string">            id: 2,</span></span><br><span class="line"><span class="string">            name: "</span>JavaScript 精粹<span class="string">"</span></span><br><span class="line"><span class="string">          &#125;</span></span><br><span class="line"><span class="string">        ]);</span></span><br><span class="line"><span class="string">      &#125; else if (path === "</span>/movies<span class="string">") &#123;</span></span><br><span class="line"><span class="string">        resolve([</span></span><br><span class="line"><span class="string">          &#123;</span></span><br><span class="line"><span class="string">            id: 1,</span></span><br><span class="line"><span class="string">            name: "</span>爱在黎明破晓前<span class="string">"</span></span><br><span class="line"><span class="string">          &#125;,</span></span><br><span class="line"><span class="string">          &#123;</span></span><br><span class="line"><span class="string">            id: 2,</span></span><br><span class="line"><span class="string">            name: "</span>恋恋笔记本<span class="string">"</span></span><br><span class="line"><span class="string">          &#125;</span></span><br><span class="line"><span class="string">        ]);</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;, 2000);</span></span><br><span class="line"><span class="string">  &#125;);</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>将数据集中在一个<code>store</code>对象中；</li>
+<li>将所有操作集中在<code>reducer</code>；</li>
+<li>创建一个<code>Context</code>；</li>
+<li>创建对数据的读写 API；</li>
+<li>将第四步的内容放到第三步的<code>Context</code>；</li>
+<li>用<code>Context.Provider</code>将<code>Context</code>提供给所有组件；</li>
+<li>各个组件用<code>useContext</code>获取读写 API；</li>
+</ol>
+<h1 id="useContext"><a href="#useContext" class="headerlink" title="useContext"></a>useContext</h1><h2 id="上下文"><a href="#上下文" class="headerlink" title="上下文"></a>上下文</h2><p><code>全局变量</code>是全局的<code>上下文</code>，<code>上下文</code>是局部的<code>全局变量</code>。</p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> C = createContext(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"App 执行了"</span>);</span><br><span class="line">  <span class="keyword">const</span> [n, setN] = useState(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;C.Provider value=&#123;&#123; n, setN &#125;&#125;&gt;</span><br><span class="line">      &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">        &lt;Baba /&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>C.Provider&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Baba</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; n, setN &#125; = useContext(C);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      我是爸爸 n: &#123;n&#125; &lt;Child /&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">function Child() &#123;</span></span><br><span class="line"><span class="regexp">  const &#123; n, setN &#125; = useContext(C);</span></span><br><span class="line"><span class="regexp">  const onClick = () =&gt; &#123;</span></span><br><span class="line"><span class="regexp">    setN(i =&gt; i + 1);</span></span><br><span class="line"><span class="regexp">  &#125;;</span></span><br><span class="line"><span class="regexp">  return (</span></span><br><span class="line"><span class="regexp">    &lt;div&gt;</span></span><br><span class="line"><span class="regexp">      我是儿子 我得到的 n: &#123;n&#125;</span></span><br><span class="line"><span class="regexp">      &lt;button onClick=&#123;onClick&#125;&gt;+1&lt;/</span>button&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>使用<code>C = createContext(initial)</code>创建上下文；</li>
+<li>使用<code>&lt;C.provider&gt;</code>圈定作用域；</li>
+<li>在作用域内使用<code>useContext(C)</code>来使用上下文；</li>
+</ol>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>不是响应式，在一个模块降<code>C</code>里面的值改变，另一个模块不会感知到这个变化。</p>
+<h1 id="useEffect"><a href="#useEffect" class="headerlink" title="useEffect"></a>useEffect</h1><h2 id="副作用"><a href="#副作用" class="headerlink" title="副作用"></a>副作用</h2><p>对环境的改变纪委副作用，如修改 document.title，但不一定非要吧副作用放在<code>useEffect</code>里，实际上叫做<code>afterRender</code>更好，每次 render 后运行。</p>
+<h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><ul>
+<li>作为<code>componentDidMount</code>使用，[]作第二个参数；</li>
+<li>作为<code>componentDidUpdate</code>使用，可指定依赖；</li>
+<li>作为<code>componentWillUnmount</code>使用，用过 return；<br>以上三种用途可以同时存在</li>
+</ul>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>如果同时存在多个<code>useEffect</code>，会按照出现次序执行。</p>
+<h1 id="useLayoutEffect"><a href="#useLayoutEffect" class="headerlink" title="useLayoutEffect"></a>useLayoutEffect</h1><h2 id="布局副作用"><a href="#布局副作用" class="headerlink" title="布局副作用"></a>布局副作用</h2><p><code>useEffect</code>在浏览器渲染完成后执行，<code>useLayoutEffect</code>在浏览器渲染前执行。</p>
+<h2 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h2><ul>
+<li><code>useLayoutEffect</code>总是比<code>useEffect</code>先执行</li>
+<li><code>useLayoutEffect</code>里的任务最好影响了 Layout</li>
+</ul>
+<h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><p>为了用户体验，<code>useLayoutEffect</code>其实会增加 DOM 的渲染时间，优先使用<code>useEffect</code>。</p>
+<h1 id="useMemo"><a href="#useMemo" class="headerlink" title="useMemo"></a>useMemo</h1><h2 id="如何理解-useMemo"><a href="#如何理解-useMemo" class="headerlink" title="如何理解 useMemo"></a>如何理解 useMemo</h2><p>首先要理解<code>useMemo</code>，必须要先将<code>React.memo</code>，示例代码如下：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [n, setN] = React.useState(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">const</span> [m, setM] = React.useState(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">const</span> onClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    setN(n + <span class="number">1</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button onClick=&#123;onClick&#125;&gt;update n &#123;n&#125;&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">      &#123;<span class="comment">/* &lt;Child data=&#123;m&#125; /&gt; */</span>&#125;</span><br><span class="line">      &lt;Child2 data=&#123;m&#125; /&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">function Child(props) &#123;</span></span><br><span class="line"><span class="regexp">  /</span><span class="regexp">/ 假设这里有大量代码</span></span><br><span class="line"><span class="regexp">  console.log("child 执行了");</span></span><br><span class="line"><span class="regexp">  return &lt;div&gt;child: &#123;props.data&#125;&lt;/</span>div&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Child2 = React.memo(Child);</span><br></pre></td></tr></table></figure>
+
+<p>这样使用了<code>React.memo</code>的<code>Child2</code>组件，在<code>n</code>变化时，<code>Child2</code>组件并不会重新<code>render</code>。
+但是，<code>React.memo</code>还是有一个问题，改造上述代码如下：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">const</span> onClickChild = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(m);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  retrun(</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;Child2 data=&#123;m&#125; onClick=&#123;onClickChild&#125; /&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ ...</span></span><br></pre></td></tr></table></figure>
+
+<p>这样的话，即使<code>Child2</code>组件使用了<code>React.memo</code>，<code>Child2</code>组件还是会重新<code>render</code>，原因其实就是<code>onClickChild</code>被赋值了一个新的函数，新旧函数功能一样，但是地址是不一样的。<br>那如何解决这样的问题呢？所以出现了<code>useMemo</code>，修改代码如下：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">const</span> onClickChild = useMemo(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> fn = <span class="function"><span class="params">div</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"on click child, m: "</span> + m);</span><br><span class="line">      <span class="built_in">console</span>.log(div);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> fn;</span><br><span class="line">  &#125;, [m]);</span><br><span class="line"></span><br><span class="line">  retrun(</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;Child2 data=&#123;m&#125; onClick=&#123;onClickChild&#125; /&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ ...</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="useMemo-特点"><a href="#useMemo-特点" class="headerlink" title="useMemo 特点"></a>useMemo 特点</h2><ul>
+<li>第一个参数是一个函数：<code>() =&gt; value</code>；</li>
+<li>第二个参数是依赖<code>[m,n]</code>；</li>
+<li>只有当依赖变化是，才会计算出新的<code>value</code>；</li>
+<li>如果依赖不变，那么就重用之前的<code>value</code>；</li>
+</ul>
+<h2 id="useMemo-注意点"><a href="#useMemo-注意点" class="headerlink" title="useMemo 注意点"></a>useMemo 注意点</h2><p>如果上述<code>value</code>是一个函数，那可能就会写成这样：<code>useMemo(() =&gt; (x) =&gt; console.log(x))</code>，这是一个返回函数的函数。那会不会觉得很难用呢？于是出现了<code>useCallback</code>。</p>
+<h1 id="useCallback"><a href="#useCallback" class="headerlink" title="useCallback"></a>useCallback</h1><p>修改上述代码，使用<code>useCallback</code>来代替<code>useMemo</code>。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// const onClickChild = useMemo(() =&gt; &#123;</span></span><br><span class="line"><span class="comment">//   const fn = div =&gt; &#123;</span></span><br><span class="line"><span class="comment">//     console.log("on click child, m: " + m);</span></span><br><span class="line"><span class="comment">//     console.log(div);</span></span><br><span class="line"><span class="comment">//   &#125;;</span></span><br><span class="line"><span class="comment">//   return fn;</span></span><br><span class="line"><span class="comment">// &#125;, [m]);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> onClickChild = useMemo(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"on click child, m: "</span> + m);</span><br><span class="line">&#125;, [m]);</span><br></pre></td></tr></table></figure>
+
+<p><code>useCallback(x =&gt; log(x), [m])</code>等价于 useMemo<code>(() =&gt; x =&gt; log(x), [m])</code>。</p>
+<h1 id="useRef"><a href="#useRef" class="headerlink" title="useRef"></a>useRef</h1><h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>如果需要一个值，在组件不断 render 时保持不变，初始化：<code>const count = useRef(0)</code>，读取：<code>count.current</code>。为什么需要这样读取呢？原因是为了保证两次使用<code>useRef</code>是同一个值（引用了一个对象地址，地址不会变）。<br><code>useRef</code>不能自动是的组件自动 render，因为这不符合 React 的理念，如果想有这个功能，就必须自己加功能，要监听 ref，当<code>ref.current</code>变化是，调用<code>setN</code>即可。</p>
+<h1 id="forwardRef"><a href="#forwardRef" class="headerlink" title="forwardRef"></a>forwardRef</h1><h1 id="useImperativeHandle"><a href="#useImperativeHandle" class="headerlink" title="useImperativeHandle"></a>useImperativeHandle</h1><h1 id="自定义-Hook"><a href="#自定义-Hook" class="headerlink" title="自定义 Hook"></a>自定义 Hook</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> useList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> [list, setList] = useState(<span class="literal">null</span>);</span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    ajax(<span class="string">"/list"</span>).then(<span class="function"><span class="params">list</span> =&gt;</span> &#123;</span><br><span class="line">      setList(list);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;, []); <span class="comment">// [] 确保只在第一次运行</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    list: list,</span><br><span class="line">    setList: setList</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> useList;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      resolve([</span><br><span class="line">        &#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">"Frank"</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">id</span>: <span class="number">2</span>, <span class="attr">name</span>: <span class="string">"Jack"</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">id</span>: <span class="number">3</span>, <span class="attr">name</span>: <span class="string">"Alice"</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">id</span>: <span class="number">4</span>, <span class="attr">name</span>: <span class="string">"Bob"</span> &#125;</span><br><span class="line">      ]);</span><br><span class="line">    &#125;, <span class="number">2000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; list, setList &#125; = useList();</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;h1&gt;List&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">      &#123;list ? (</span></span><br><span class="line"><span class="regexp">        &lt;ol&gt;</span></span><br><span class="line"><span class="regexp">          &#123;list.map(item =&gt; (</span></span><br><span class="line"><span class="regexp">            &lt;li key=&#123;item.id&#125;&gt;&#123;item.name&#125;&lt;/</span>li&gt;</span><br><span class="line">          ))&#125;</span><br><span class="line">        &lt;<span class="regexp">/ol&gt;</span></span><br><span class="line"><span class="regexp">      ) : (</span></span><br><span class="line"><span class="regexp">        "加载中..."</span></span><br><span class="line"><span class="regexp">      )&#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上述代码，<code>useList</code>这个 api 就是自定义的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"><i class="fa fa-tag"></i> React</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/14/react造轮子-2/" rel="next" title="react造轮子-Icon组件">
+                <i class="fa fa-chevron-left"></i> react造轮子-Icon组件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/14/useState/" rel="prev" title="React useState">
+                React useState <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Shi Xiang">
+            
+              <p class="site-author-name" itemprop="name">Shi Xiang</p>
+              <p class="site-description motion-element" itemprop="description">做最好的自己，过想要的生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MccSx" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/mccsx" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#useState"><span class="nav-number">1.</span> <span class="nav-text">useState</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用状态"><span class="nav-number">1.1.</span> <span class="nav-text">使用状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useState-接受函数"><span class="nav-number">1.2.</span> <span class="nav-text">useState 接受函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setState-接受函数"><span class="nav-number">1.3.</span> <span class="nav-text">setState 接受函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#useReducer"><span class="nav-number">2.</span> <span class="nav-text">useReducer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-useReducer，用来践行-Flux-Redux-的思想"><span class="nav-number">2.1.</span> <span class="nav-text">使用 useReducer，用来践行 Flux/Redux 的思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何代替-Redux"><span class="nav-number">2.2.</span> <span class="nav-text">如何代替 Redux</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#useContext"><span class="nav-number">3.</span> <span class="nav-text">useContext</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#上下文"><span class="nav-number">3.1.</span> <span class="nav-text">上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-number">3.2.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">3.3.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#useEffect"><span class="nav-number">4.</span> <span class="nav-text">useEffect</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#副作用"><span class="nav-number">4.1.</span> <span class="nav-text">副作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用途"><span class="nav-number">4.2.</span> <span class="nav-text">用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-number">4.3.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#useLayoutEffect"><span class="nav-number">5.</span> <span class="nav-text">useLayoutEffect</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#布局副作用"><span class="nav-number">5.1.</span> <span class="nav-text">布局副作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特点-1"><span class="nav-number">5.2.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经验"><span class="nav-number">5.3.</span> <span class="nav-text">经验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#useMemo"><span class="nav-number">6.</span> <span class="nav-text">useMemo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何理解-useMemo"><span class="nav-number">6.1.</span> <span class="nav-text">如何理解 useMemo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useMemo-特点"><span class="nav-number">6.2.</span> <span class="nav-text">useMemo 特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useMemo-注意点"><span class="nav-number">6.3.</span> <span class="nav-text">useMemo 注意点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#useCallback"><span class="nav-number">7.</span> <span class="nav-text">useCallback</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#useRef"><span class="nav-number">8.</span> <span class="nav-text">useRef</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目的"><span class="nav-number">8.1.</span> <span class="nav-text">目的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#forwardRef"><span class="nav-number">9.</span> <span class="nav-text">forwardRef</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#useImperativeHandle"><span class="nav-number">10.</span> <span class="nav-text">useImperativeHandle</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义-Hook"><span class="nav-number">11.</span> <span class="nav-text">自定义 Hook</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shi Xiang</span>
+
+  
+</div>
+
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
++ -->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
